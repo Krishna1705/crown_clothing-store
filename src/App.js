@@ -88,7 +88,8 @@ const mapStateToProps=({user})=>({//user is key of rootreducer
   currentUser:user.currentUser
 })
 
-//mapDispatchToProps-this function actually will update app componenr based on use action
+//mapDispatchToProps-this function actually will update app component based on use action
+//means this function dispatch an action
 const mapDispatchToProps=dispatch=>({
      setCurrentUser:user=>dispatch(setCurrentUser(user))//setCurrentUser(user)-this is action file' function
 })
