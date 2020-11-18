@@ -12,7 +12,7 @@ const config={
     appId: "1:727911051834:web:07382c9315a183fa7f7b03",
     measurementId: "G-YH4KPWQTLK"
 };
-
+//storing user data in firestore database from firebase platform[authentication portion]
 export const createUserProfileDocument=async (userAuth,additionalData)=>{
 
      if(!userAuth) return;

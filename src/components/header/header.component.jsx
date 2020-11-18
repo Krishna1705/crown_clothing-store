@@ -49,10 +49,18 @@ return(
 //})
 
 //this function returns valus from the rootreducer 
-const mapStateToProps=({user:{currentUser},cart:{hidden}})=>
+/* const mapStateToProps=({user:{currentUser},cart:{hidden}})=>
                                                                 ({
                                                                         currentUser,
                                                                         hidden
                                                                     })
+ */
+//we can write above function s follows without using object destructuring
+//it returns values from the root reducer.(STATE OBJECT VALUE IS FROM ROOT REDUCER)
+//it takes state as an argument and returns an object
+const mapStateToProps=state=>({
+                                hidden:  state.cart.hidden,
+                                currentUser: state.user.currentUser
+                               })
 
 export default connect(mapStateToProps,null)(Header);

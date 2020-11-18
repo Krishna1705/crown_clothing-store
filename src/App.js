@@ -29,6 +29,7 @@ class App extends React.Component {
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth=>{
                                          //this.setState({currentUser:user});
                                          // console.log(user);
+ //till now,we have stored data in firestore,but follow code will fetch user data in our app from database
             if(userAuth){
                 const userRef = await createUserProfileDocument(userAuth);
                 userRef.onSnapshot(snapShot=>{
