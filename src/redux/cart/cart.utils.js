@@ -5,7 +5,7 @@
 //create new object with update quantity every time,bcoz if we make change in property of object then 
 //react will not re render component,but if we make changes in object then it will re render component.
 
-const addItemToCart=(cartItems,cartItemToAdd)=>{
+export const addItemToCart=(cartItems,cartItemToAdd)=>{
     //find() will return first value from the array based on condition.when condition become true it returns first element from the array.
    const existingCartItem= cartItems.find(cartItem=>
                                                 cartItem.id===cartItemToAdd.id
@@ -26,4 +26,20 @@ const addItemToCart=(cartItems,cartItemToAdd)=>{
    }
 }
 
-export default addItemToCart;
+//remove item from cart
+export const removeItemFromCart=(cartItems,cartItemToRemove)=>{
+
+    const existingCartItem=cartItems.find(cartItem=>cartItem.id===cartItemToRemove.id);
+
+    if(existingCartItem.quantity===1){
+
+          return cartItems.filter(cartItem=>cartItem.id!==cartItemToRemove.id)
+
+    }
+        return cartItems.map(cartItem=>
+            cartItem.id===cartItemToRemove.id?
+            {...cartItem,quantity:cartItem.quantity - 1}
+            : 
+            cartItem
+          )
+}
