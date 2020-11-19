@@ -2,6 +2,10 @@ import React from 'react';
 import {ReactComponent as ShoppingIcon } from '../../asset/shopping-bag.svg';
 import {connect} from 'react-redux';
 import {toggleCartHidden} from '../../redux/cart/cart.actions';
+
+
+//use of reselect
+import {createStructuredSelector} from 'reselect';
 import { selectCartItemsCount} from '../../redux/cart/cart.selectors';
 
 import './cart-icon.styles.scss';
@@ -31,12 +35,19 @@ const mapStateToProps=state=>({
  }) */
 
  //use of reselect as folows:we will create cart.selectors.js file and use it as follows: 
- const mapStateToProps=state=>{
-     console.log("i m called");
+/*  const mapStateToProps=state=>{
+     console.log("itemcount is called");
      return{
         itemCount:selectCartItemsCount(state)
      }
     
- }
+ } */
+//use of createStructuredSelector from reselect
+
+const mapStateToProps=createStructuredSelector({
+                            itemCount:selectCartItemsCount
+                        })
+  
+  
 
 export default connect(mapStateToProps,mapDispatchToProps)(CartIcon);

@@ -5,11 +5,16 @@ import {Switch,Route,Redirect} from  'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/singn-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/checkout/checkoutpage.component';
+
 import {auth,createUserProfileDocument} from './components/firebase/firebase.utils';
 
 
 import {connect} from 'react-redux';
 import{setCurrentUser} from './redux/user/user.actions';
+//use of reselect
+import {createStructuredSelector} from 'reselect';
+import {selectCurrentUser} from './redux/user/user.selectors';
 
 class App extends React.Component {
   //we can remove follow constructor code after writing mapDispatchToProps() function.
@@ -67,6 +72,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path='/' component={Homepage}/>
         <Route  path='/shop' component={ShopPage}/>
+        <Route  path='/checkout' component={CheckoutPage}/>
         <Route  exact path='/signin' 
         render={()=>this.props.currentUser?
                     (
@@ -85,10 +91,18 @@ class App extends React.Component {
   
 }
 
-const mapStateToProps=({user})=>({//user is key of rootreducer
+/* const mapStateToProps=({user})=>({//user is key of rootreducer
   currentUser:user.currentUser
 })
-
+ */
+//use of reselect
+/* const mapStateToProps=state=>({
+  currentUser:selectCurrentUser(state)
+}) */
+//use of createStructuredSelector from reselect
+const mapStateToProps=createStructuredSelector({
+  currentUser:selectCurrentUser
+})
 //mapDispatchToProps-this function actually will update app component based on use action
 //means this function dispatch an action
 const mapDispatchToProps=dispatch=>({
