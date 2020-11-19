@@ -4,6 +4,7 @@ import CartItem from '../cart-item/cart-item.component';
 import {connect} from 'react-redux';
 
 import CustomButton from '../custom-button/custom-button.component';
+import { selectCartItems} from '../../redux/cart/cart.selectors';
 
 const CartDropdown=({cartItems})=>{
     return (
@@ -24,7 +25,12 @@ const CartDropdown=({cartItems})=>{
        cartItems
 }) */
 
-const mapStateToProps=state=>({
+/* const mapStateToProps=state=>({
     cartItems:state.cart.cartItems
-})
+}) */
+//we also can use memoize selector as follows: 
+const mapStateToProps=state=>({
+    cartItems:selectCartItems(state)
+}) 
+
 export default connect(mapStateToProps,null)(CartDropdown);

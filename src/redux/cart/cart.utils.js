@@ -6,7 +6,7 @@
 //react will not re render component,but if we make changes in object then it will re render component.
 
 const addItemToCart=(cartItems,cartItemToAdd)=>{
-    //find() will return boolean value
+    //find() will return first value from the array based on condition.when condition become true it returns first element from the array.
    const existingCartItem= cartItems.find(cartItem=>
                                                 cartItem.id===cartItemToAdd.id
                                           )
