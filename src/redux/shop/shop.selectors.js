@@ -19,7 +19,8 @@ const selectShop=state=>state.shop//notice root-reducer
 
 export const selectShopCollectionsForPreview=createSelector(
     [selectShopCollections],
-    (collections)=>Object.keys(collections).map(key=>collections[key])//it will convert aray into array data
+    (collections)=>collections?Object.keys(collections).map(key=>collections[key]):[]//it will convert objects into array data
+    //above line we add ? : ,bcoz changes of HOC lecture
    )
 
 
@@ -37,5 +38,5 @@ export const selectCollection=collectionUrlParam=>createSelector(
 
 export const selectCollection=collectionUrlParam=>createSelector(
     [selectShopCollections],
-    (collections)=>collections[collectionUrlParam]
+    (collections)=>(collections?collections[collectionUrlParam]:null)//use trenary bcoz of HOC changes
 )

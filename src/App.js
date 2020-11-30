@@ -16,6 +16,11 @@ import{setCurrentUser} from './redux/user/user.actions';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './redux/user/user.selectors';
 
+ //add shop data to firestore dynamically
+import {selectShopCollectionsForPreview} from './redux/shop/shop.selectors';
+//import {addCollectionAndDocuments} from './components/firebase/firebase.utils'; 
+import AdminPage from './pages/admin/adminpage.component';
+
 class App extends React.Component {
   //we can remove follow constructor code after writing mapDispatchToProps() function.
   /* constructor(){
@@ -30,7 +35,11 @@ class App extends React.Component {
   unsubscribeFromAuth=null;
   
   componentDidMount(){
-    const {setCurrentUser}=this.props;
+
+
+   const {setCurrentUser}=this.props;
+   /* //add shop data dynamically as follows: 
+   const {setCurrentUser,collectionsArray}=this.props;*/
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth=>{
                                          //this.setState({currentUser:user});
                                          // console.log(user);
@@ -56,8 +65,11 @@ class App extends React.Component {
             //this.setState({currentUser:userAuth});
             setCurrentUser(userAuth);
             }
-                     
-           
+         //add shop_data into firestore manually
+         //addCollectionAndDocuments('collections',collectionsArray);
+         //here we dnt want to pass all shop data,bcoz firestore will automatically generate id and routerName from its own so we only pass title and items to the firestore
+        /*     addCollectionAndDocuments('collections',collectionsArray.map(({title,items})=>({title,items}))
+                                    )   */
       });
     }
 
@@ -70,6 +82,7 @@ class App extends React.Component {
       <div>
       <Header/>
       <Switch>
+     
         <Route exact path='/' component={Homepage}/>
         <Route  path='/shop' component={ShopPage}/>
         <Route  path='/checkout' component={CheckoutPage}/>
@@ -83,6 +96,7 @@ class App extends React.Component {
                     )
                }
         />
+         <Route exact path='/admin' component={AdminPage}/>
         
       </Switch>
       </div>
@@ -101,7 +115,9 @@ class App extends React.Component {
 }) */
 //use of createStructuredSelector from reselect
 const mapStateToProps=createStructuredSelector({
-  currentUser:selectCurrentUser
+  currentUser:selectCurrentUser,
+  //add shop_data into firestore manually
+  collectionsArray:selectShopCollectionsForPreview
 })
 //mapDispatchToProps-this function actually will update app component based on use action
 //means this function dispatch an action

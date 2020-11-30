@@ -9,7 +9,7 @@ const CollectionPage=({collection})=>{
    // console.log(match);
    console.log(collection);
     //console.log(match.params.collectionId);//ans will be watever collectionId is
-    const {id,title,items}=collection;
+    const {title,items}=collection;
     return(
         <div className="collection-page">
            <h2 className="title">{title}</h2>
