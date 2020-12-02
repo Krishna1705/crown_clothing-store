@@ -1,3 +1,4 @@
+//yarn add reselect
 //2 types of selectors are there.
 /*input selector,output selector
 input selector-it does not use createSelector

@@ -4,8 +4,10 @@ import rootReducer from './root-reducer';
 
 //use of redux-persist
 import {persistStore} from 'redux-persist';
+//use of redux-thunk
+import thunk from 'redux-thunk';
 
-const middlewares=[];
+const middlewares=[thunk];
 
 if(process.env.NODE_ENV === 'development'){
     middlewares.push(logger);
