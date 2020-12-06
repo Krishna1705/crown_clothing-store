@@ -7,11 +7,11 @@ import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/singn-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkoutpage.component';
 
-import {auth,createUserProfileDocument} from './components/firebase/firebase.utils';
+//import {auth,createUserProfileDocument} from './components/firebase/firebase.utils';
 
 
 import {connect} from 'react-redux';
-import{setCurrentUser} from './redux/user/user.actions';
+//import{setCurrentUser} from './redux/user/user.actions';
 //use of reselect
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './redux/user/user.selectors';
@@ -20,7 +20,7 @@ import {selectCurrentUser} from './redux/user/user.selectors';
 import {selectShopCollectionsForPreview} from './redux/shop/shop.selectors';
 //import {addCollectionAndDocuments} from './components/firebase/firebase.utils'; 
 import AdminPage from './pages/admin/adminpage.component';
-
+import {checkUserSession} from './redux/user/user.actions';
 class App extends React.Component {
   //we can remove follow constructor code after writing mapDispatchToProps() function.
   /* constructor(){
@@ -30,16 +30,12 @@ class App extends React.Component {
     }
   } */
 
-  
- 
   unsubscribeFromAuth=null;
   
-  componentDidMount(){
-
-
+ /*  componentDidMount(){
    const {setCurrentUser}=this.props;
-   /* //add shop data dynamically as follows: 
-   const {setCurrentUser,collectionsArray}=this.props;*/
+   //add shop data dynamically as follows: 
+  // const {setCurrentUser,collectionsArray}=this.props;
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth=>{
                                          //this.setState({currentUser:user});
                                          // console.log(user);
@@ -47,13 +43,13 @@ class App extends React.Component {
             if(userAuth){
                 const userRef = await createUserProfileDocument(userAuth);
                 userRef.onSnapshot(snapShot=>{
-               /*     //  console.log(snapShot);
-                  this.setState({
-                            currentUser:{
-                                    id:snapShot.id,
-                                    ...snapShot.data()
-                            }
-                          },()=>console.log(this.state)) */
+                   //  console.log(snapShot);
+                //  this.setState({
+                         //   currentUser:{
+                          //          id:snapShot.id,
+                          //          ...snapShot.data()
+                         //   }
+                        //  },()=>console.log(this.state)) 
 
                           setCurrentUser({
                             id:snapShot.id,
@@ -68,10 +64,17 @@ class App extends React.Component {
          //add shop_data into firestore manually
          //addCollectionAndDocuments('collections',collectionsArray);
          //here we dnt want to pass all shop data,bcoz firestore will automatically generate id and routerName from its own so we only pass title and items to the firestore
-        /*     addCollectionAndDocuments('collections',collectionsArray.map(({title,items})=>({title,items}))
-                                    )   */
+        //    addCollectionAndDocuments('collections',collectionsArray.map(({title,items})=>({title,items}))
+                                 //   )   
       });
+    } */
+
+    //after redux saga
+    componentDidMount(){
+      const {checkUserSession}=this.props;
+      checkUserSession();
     }
+
 
   componentWillUnmount(){
        this.unsubscribeFromAuth();
@@ -121,7 +124,11 @@ const mapStateToProps=createStructuredSelector({
 })
 //mapDispatchToProps-this function actually will update app component based on use action
 //means this function dispatch an action
-const mapDispatchToProps=dispatch=>({
+/* const mapDispatchToProps=dispatch=>({
      setCurrentUser:user=>dispatch(setCurrentUser(user))//setCurrentUser(user)-this is action file' function
+}) */
+
+const mapDispatchToProps=dispatch=>({
+ checkUserSession:()=>dispatch(checkUserSession())
 })
 export default connect(mapStateToProps,mapDispatchToProps)(App);

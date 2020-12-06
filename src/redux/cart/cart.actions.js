@@ -31,3 +31,7 @@ export const clearItemFromCart=(item)=>{
       payload:item
   }
 }
+
+export const clearCart=()=>({
+    type:CartActionType.CLEAR_CART
+})

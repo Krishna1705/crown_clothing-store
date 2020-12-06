@@ -9,7 +9,12 @@ import {connect} from 'react-redux';
 //import {updateCollections} from './../../redux/shop/shop.actions';
 
 //use of redux-thunk
-import {fetchCollectionsStartAsync} from './../../redux/shop/shop.actions';
+//import {fetchCollectionsStartAsync} from './../../redux/shop/shop.actions';
+
+//use of redux-saga
+import {fetchCollectionsStart} from './../../redux/shop/shop.actions';
+
+
 //import {createStructuredSelector} from 'reselect';
 
 //use of HOC
@@ -64,12 +69,19 @@ class ShopPage extends React.Component{
                       
 }  */
                        
-//after redux-yhunk
+//after redux-thunk
 
-componentDidMount(){
+/* componentDidMount(){
  const {fetchCollectionsStartAsync} =this.props;
  fetchCollectionsStartAsync();
-}
+} */
+
+//after redux-saga
+
+componentDidMount(){
+  const {fetchCollectionsStart} =this.props;
+  fetchCollectionsStart();
+ }
 
   render(){
     const {match}=this.props
@@ -122,7 +134,12 @@ componentDidMount(){
 }) */
 
 //after redux-thunk
-const mapDispatchToProps=dispatch=>({
+/* const mapDispatchToProps=dispatch=>({
   fetchCollectionsStartAsync:()=>dispatch(fetchCollectionsStartAsync())
+}) */
+
+//after redux-saga
+const mapDispatchToProps=dispatch=>({
+  fetchCollectionsStart:()=>dispatch(fetchCollectionsStart())
 })
 export default connect(null,mapDispatchToProps)(ShopPage);

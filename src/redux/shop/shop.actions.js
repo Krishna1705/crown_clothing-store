@@ -28,7 +28,10 @@ import {firestore,convertCollectionSnapshotToMap} from '../../components/firebas
  //asynchronous redux
  //when this file loaded,redux-thunk will find function to run ,it will not proceed objets so it find 
  //fetchCollectionStartAsync and then it perorms it
+//--------------redux thunk----------------------
+//NOTE:if we use redux-saga then we need to comment below code
 
+ /* 
  export const fetchCollectionsStartAsync=()=>{
  
     return dispatch=>{
@@ -44,4 +47,4 @@ import {firestore,convertCollectionSnapshotToMap} from '../../components/firebas
                                 .catch(error=>dispatch(fectchCollectionFailure(error.message)))
  };
 }
-
+ */
